@@ -1,17 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { User } from '../classes/user';
 import { EnrollmentService } from '../services/enrollment.service';
 
 @Component({
   selector: 'app-tdf',
   templateUrl: './tdf.component.html',
-  styleUrls: ['./tdf.component.css']
+  styleUrls: ['./tdf.component.css'],
 })
 export class TdfComponent {
-
   title = 'formsTutorial';
-
+  submitted = false;
   topicHasError = true;
+  errorMsg = '';
+
   topics = ['Angular', 'React', 'Vue'];
 
   userModel = new User(
@@ -33,10 +34,10 @@ export class TdfComponent {
     }
   }
   onSubmit() {
+    this.submitted = true;
     this.enrollmentService.enroll(this.userModel).subscribe(
-      (data) => console.log('Success!', data),
-      (error) => console.error('Error!', error)
+      (data) => console.log('Success!', data)
+      // (error) => this.errorMsg=error.statusText
     );
   }
-
 }

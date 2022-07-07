@@ -1,0 +1,355 @@
+<div class="container-fluid">
+  <h2>Employee Registration Form</h2>
+  {{ registrationForm.value | json }}
+  <Form [formGroup]="registrationForm">
+    <div class="row">
+      <div class="form-group col-md-9">
+        <label>Employee Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [class.is-invalid]="
+            registrationForm.get('employeeName')?.invalid &&
+            registrationForm.get('employeeName')?.touched
+          "
+          formControlName="employeeName"
+          placeholder="Enter Name"
+          required
+        />
+        <div
+          *ngIf="
+            registrationForm.get('employeeName')?.invalid &&
+            registrationForm.get('employeeName')?.touched
+          "
+        >
+          <small
+            *ngIf="registrationForm.get('employeeName')?.errors?.['required']"
+            class="text-danger"
+            >First Name is required</small
+          >
+          <small
+            *ngIf="registrationForm.get('employeeName')?.errors?.['minlength']"
+            class="text-danger"
+            >First name must be at least 4 characters</small
+          >
+          <small
+            *ngIf="registrationForm.get('employeeName')?.errors?.['forbiddenName']"
+            class="text-danger"
+            >{{registrationForm.get('employeeName')?.errors?.['forbiddenName'].value}}
+            name is not allowed</small
+          >
+        </div>
+        <!-- <small
+          [class.d-none]="
+            registrationForm.get('employeeName')?.valid ||
+            registrationForm.get('employeeName')?.untouched
+          "
+          class="text-danger"
+          >First Name is required</small
+        > -->
+      </div>
+      <div class="form-group col-md-3">
+        <label>Employee Id</label>
+        <input
+          type="text"
+          name="employeeId"
+          [class.is-invalid]="
+            registrationForm.get('employeeId')?.invalid &&
+            registrationForm.get('employeeId')?.touched
+          "
+          class="form-control"
+          placeholder="Enter Employee Id"
+          formControlName="employeeId"
+          required
+        />
+        <small
+          class="text-danger"
+          *ngIf="
+            registrationForm.get('employeeId')?.invalid &&
+            registrationForm.get('employeeId')?.touched
+          "
+          >Enter Employee ID</small
+        >
+      </div>
+    </div>
+    <!-- <div class="form-group col-md-6">
+        <label>Last Name</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="lastName"
+          [class.is-invalid]="
+            registrationForm.get('lastName')?.invalid &&
+            registrationForm.get('lastName')?.touched
+          "
+          placeholder="Enter Last Name"
+          required
+        />
+        <div
+          *ngIf="
+            registrationForm.get('lastName')?.invalid &&
+            registrationForm.get('lastName')?.touched
+          "
+        >
+          <small
+            *ngIf="registrationForm.get('lastName')?.errors?.['required']"
+            class="text-danger"
+            >Last Name is required</small
+          >
+          <small
+            *ngIf="registrationForm.get('lastName')?.errors?.['minlength']"
+            class="text-danger"
+            >Last name must be at least 4 characters</small
+          >
+          <small
+            *ngIf="registrationForm.get('lastName')?.errors?.['maxlength']"
+            class="text-danger"
+            >Last name not more than 15 characters</small
+          >
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="form-group">
+      <label>Employee Id</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="employeeId"
+        placeholder="Enter employee ID"
+        required
+      />
+    </div> -->
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Password</label>
+        <input
+          type="password"
+          name="password"
+          [class.is-invalid]="
+            registrationForm.get('password')?.invalid &&
+            registrationForm.get('password')?.touched
+          "
+          class="form-control"
+          placeholder="Enter Password"
+          formControlName="password"
+          required
+        />
+        <div
+          *ngIf="
+            registrationForm.get('password')?.invalid &&
+            registrationForm.get('password')?.touched
+          "
+        >
+          <small
+            *ngIf="registrationForm.get('password')?.errors?.['minlength']"
+            class="text-danger"
+            >Password should 8 characters long.</small
+          >
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Confirm Password</label>
+        <input
+          type="password"
+          name="confirmPassword"
+          class="form-control"
+          [class.is-invalid]="
+            registrationForm.get('confirmPassword')?.invalid &&
+            registrationForm.get('confirmPassword')?.touched
+          "
+          placeholder="Confirm Password"
+          formControlName="confirmPassword"
+          required
+        />
+        <div
+          *ngIf="
+            registrationForm.get('confirmPassword')?.invalid &&
+            registrationForm.get('confirmPassword')?.touched
+          "
+        >
+          <small
+            class="text-danger"
+            *ngIf="
+              registrationForm.get('password')?.value !=
+                registrationForm.get('confirmPassword')?.value &&
+              registrationForm.get('confirmPassword')?.touched
+            "
+            >Enter Correct Password</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Designation</label>
+        <input
+          type="text"
+          class="form-control"
+          [class.is-invalid]="
+            registrationForm.get('designation')?.invalid &&
+            registrationForm.get('designation')?.touched
+          "
+          formControlName="designation"
+          placeholder="Designation"
+          required
+        />
+
+        <div
+          *ngIf="
+            registrationForm.get('designation')?.invalid &&
+            registrationForm.get('designation')?.touched
+          "
+        >
+          <small
+            *ngIf="
+              registrationForm.get('designation')?.errors?.['required']"
+            class="text-danger"
+            >Enter Designation</small
+          >
+          <small
+            *ngIf="registrationForm.get('designation')?.errors?.['forbiddenName']"
+            class="text-danger"
+            >Designation not be CEO</small
+          >
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label>Department</label>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="department"
+          [class.is-invalid]="
+            registrationForm.get('department')?.invalid &&
+            registrationForm.get('department')?.touched
+          "
+          placeholder="Department"
+          required
+        />
+        <div
+          *ngIf="
+            registrationForm.get('department')?.invalid &&
+            registrationForm.get('department')?.touched
+          "
+        >
+          <small
+            *ngIf="
+              registrationForm.get('department')?.errors?.['required']"
+            class="text-danger"
+            >Enter Department</small
+          >
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Email Id</label>
+        <input
+          type="email"
+          [class.is-invalid]="
+            registrationForm.get('emailId')?.invalid &&
+            registrationForm.get('emailId')?.touched
+          "
+          class="form-control"
+          formControlName="emailId"
+          placeholder="Email id"
+          required
+        />
+      </div>
+      <div formArrayName="mobileNumber" class="form-group col-md-6">
+        <ng-container
+          *ngFor="let mobile of mobileNumber.controls; let i = index"
+        >
+          <div style="display: flex">
+            <div class="form-group col-md-11">
+              <label for="mobile-{{ i }}">Mobile Number</label>
+              <input
+                id="mobile-{{ i }}"
+                type="text"
+                type="tel"
+                class="form-control"
+                formControlName="mobileNumber"
+                placeholder="Phone number"
+                [formControlName]="i"
+                required
+              />
+            </div>
+            <div>
+              <button class="btn btn-info mt-4 mx-2" (click)="addMobileItem()">
+                +
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="row mb-3 mt-2" formArrayName="employeeAddress">
+      <ng-container
+        *ngFor="let address of employeeAddress.controls; let i = index"
+      >
+        <h4 class="col-md-3 mt-4">Add Address</h4>
+        <span class="col-md-8"
+          ><button class="btn btn-info mt-4 mx-2" (click)="addAddressItem()">
+            +
+          </button></span
+        >
+        <div class="form-group col-md-4">
+          <label class="">Street</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="street"
+            placeholder="Street"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label class="">Area</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="area"
+            placeholder="Area"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label class="">City</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="city"
+            placeholder="City"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label class="">State</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="state"
+            placeholder="State"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label class="">Country</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="country"
+            placeholder="Country"
+          />
+        </div>
+        <div class="form-group col-md-4">
+          <label class="">Pin Code</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="pincode"
+            placeholder="Pincode"
+          />
+        </div>
+      </ng-container>
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+    <button class="btn btn-secondary ml-2" type="button">Load API Data</button>
+  </Form>
+</div>

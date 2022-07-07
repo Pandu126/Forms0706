@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { User } from './classes/user';
-import { EnrollmentService } from './services/enrollment.service';
 
 @Component({
   selector: 'app-root',

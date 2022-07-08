@@ -23,7 +23,7 @@ export class RmfComponent {
         [
           Validators.required,
           Validators.minLength(4),
-          this.forbiddenNameValidator,
+          // this.forbiddenNameValidator,
         ],
       ],
       employeeId: [
@@ -41,14 +41,14 @@ export class RmfComponent {
       emailId: ['', [Validators.email]],
       mobileNumber: this.fb.array([this.fb.control('')]),
       employeeAddress: this.fb.array([
-      {
+        this.fb.group({
           street: '',
           area: '',
           city: '',
           state: '',
           country: '',
           pincode: '',
-        },
+        }),
       ]),
     }
     // ,{ Validator: this.passwordValidator }
@@ -65,7 +65,16 @@ export class RmfComponent {
     return this.registrationForm.get('employeeAddress') as FormArray;
   }
   addAddressItem() {
-    this.employeeAddress.push(this.fb.control(''));
+    this.employeeAddress.push(
+      this.fb.group({
+        street: '',
+        area: '',
+        city: '',
+        state: '',
+        country: '',
+        pincode: '',
+      })
+    );
   }
   forbiddenNameValidator(forbiddenName: RegExp): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {

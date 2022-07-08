@@ -283,16 +283,12 @@
         </ng-container>
       </div>
     </div>
-    <div class="row mb-3 mt-2" formArrayName="employeeAddress">
+    <div class="row mb-3 mt-3" formArrayName="employeeAddress">
       <ng-container
         *ngFor="let address of employeeAddress.controls; let i = index"
+        [formGroupName]="i"
       >
-        <h4 class="col-md-3 mt-4">Add Address</h4>
-        <span class="col-md-8"
-          ><button class="btn btn-info mt-4 mx-2" (click)="addAddressItem()">
-            +
-          </button></span
-        >
+        <h4>Add Address {{ i + 1 }}</h4>
         <div class="form-group col-md-4">
           <label class="">Street</label>
           <input
@@ -347,7 +343,13 @@
             placeholder="Pincode"
           />
         </div>
+        <hr class="mt-4" />
       </ng-container>
+      <div>
+        <button class="btn btn-info mx-2" (click)="addAddressItem()">
+          Add new address
+        </button>
+      </div>
     </div>
     <button class="btn btn-primary" type="submit">Register</button>
     <button class="btn btn-secondary ml-2" type="button">Load API Data</button>

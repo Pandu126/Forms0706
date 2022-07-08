@@ -8,13 +8,15 @@ import { AppComponent } from './app.component';
 import { TdfComponent } from './tdf/tdf.component';
 import { EmpFormComponent } from './emp-form/emp-form.component';
 import { RmfComponent } from './rmf/rmf.component';
+import { PracticeComponent } from './practice/practice.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TdfComponent,
     EmpFormComponent,
-    RmfComponent
+    RmfComponent,
+    PracticeComponent
   ],
   imports: [
     BrowserModule,

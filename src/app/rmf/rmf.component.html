@@ -265,9 +265,12 @@
               <label for="mobile-{{ i }}">Mobile Number</label>
               <input
                 id="mobile-{{ i }}"
-                type="text"
                 type="tel"
                 class="form-control"
+                [class.is-invalid]="
+                  registrationForm.get('mobileNumber')?.invalid &&
+                  registrationForm.get('mobileNumber')?.touched
+                "
                 formControlName="mobileNumber"
                 placeholder="Phone number"
                 [formControlName]="i"
@@ -344,9 +347,15 @@
           />
         </div>
         <hr class="mt-4" />
+        <div>
+          <button class="btn btn-warning" (click)="removeAddress(i)">
+            Remove Address {{i+1}}
+          </button>
+        </div>
       </ng-container>
+
       <div>
-        <button class="btn btn-info mx-2" (click)="addAddressItem()">
+        <button class="btn btn-info mt-3" (click)="addAddressItem()">
           Add new address
         </button>
       </div>

@@ -39,15 +39,20 @@ export class RmfComponent {
       department: ['', [Validators.required, Validators.minLength(3)]],
 
       emailId: ['', [Validators.email]],
-      mobileNumber: this.fb.array([this.fb.control('')]),
+      mobileNumber: this.fb.array([
+        this.fb.control('', [
+          Validators.required,
+          Validators.pattern('[0-9]{10}'),
+        ]),
+      ]),
       employeeAddress: this.fb.array([
         this.fb.group({
-          street: '',
-          area: '',
-          city: '',
-          state: '',
-          country: '',
-          pincode: '',
+          street: [''],
+          area: [''],
+          city: [''],
+          state: [''],
+          country: [''],
+          pincode: [''],
         }),
       ]),
     }
@@ -75,6 +80,9 @@ export class RmfComponent {
         pincode: '',
       })
     );
+  }
+  removeAddress(i: any) {
+    this.employeeAddress.removeAt(i);
   }
   forbiddenNameValidator(forbiddenName: RegExp): ValidatorFn {
     return (control: AbstractControl): { [key: string]: any } | null => {
